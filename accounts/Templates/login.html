@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .background-radial-gradient {
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%,
+                hsl(218, 41%, 35%) 15%,
+                hsl(218, 41%, 30%) 35%,
+                hsl(218, 41%, 20%) 75%,
+                hsl(218, 41%, 19%) 80%,
+                transparent 100%),
+                radial-gradient(1250px circle at 100% 100%,
+                hsl(218, 41%, 45%) 15%,
+                hsl(218, 41%, 30%) 35%,
+                hsl(218, 41%, 20%) 75%,
+                hsl(218, 41%, 19%) 80%,
+                transparent 100%);
+        }
+
+        #radius-shape-1 {
+            height: 220px;
+            width: 220px;
+            top: -60px;
+            left: -130px;
+            background: radial-gradient(#44006b, #ad1fff);
+            overflow: hidden;
+        }
+
+        #radius-shape-2 {
+            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+            bottom: -60px;
+            right: -110px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(#44006b, #ad1fff);
+            overflow: hidden;
+        }
+
+        .bg-glass {
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(200%) blur(25px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden" style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container d-flex align-items-center justify-content-center h-100">
+        <div class="row w-100 gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0 text-lg-start text-center" style="z-index: 10">
+                <h2 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    Discover the Latest in Blogging <br />
+                    <span style="color: hsl(218, 81%, 75%)">Stay updated with our posts</span>
+                </h2>
+                <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                    Explore our latest blog posts, engage with insightful articles, and join the conversation through comments. Our platform brings you the freshest content and perspectives on various topics. Stay tuned for updates and join our community of avid readers and contributors.
+                </p>
+            </div>
+
+            <div class="col-lg-6 position-relative">
+                <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            <input type='hidden' name='next' value="{{ next }}">
+                            <div style="display: flex; justify-content: center; align-items: center; margin-top: -20px">
+                                <span style="color: hsl(218, 81%, 75%); font-size: 2rem;">Login</span>
+                            </div>
+
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <!-- Label -->
+                                <label class="form-label" for="{{ form.username.id_for_label }}">
+                                    {{ form.username.label }}
+                                </label>
+                                <!-- Username field -->
+                                <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" class="form-control" placeholder="Enter your username" />
+                                <!-- Errors -->
+                                <div class="text-danger">
+                                    {{ form.username.errors }}
+                                </div>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <!-- Label -->
+                                <label class="form-label" for="{{ form.password.id_for_label }}">
+                                    {{ form.password.label }}
+                                </label>
+                                <!-- Password field -->
+                                <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" class="form-control" placeholder="Enter your password" />
+                                <!-- Errors -->
+                                <div class="text-danger">
+                                    {{ form.password.errors }}
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                Login
+                            </button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <span>Don't have an account?</span>
+                                <a href="{% url 'signup' %}">Sign up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+
+</body>
+</html>

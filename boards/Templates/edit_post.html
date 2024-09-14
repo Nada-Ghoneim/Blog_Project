@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .background-radial-gradient {
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%,
+                hsl(218, 41%, 35%) 15%,
+                hsl(218, 41%, 30%) 35%,
+                hsl(218, 41%, 20%) 75%,
+                hsl(218, 41%, 19%) 80%,
+                transparent 100%),
+                radial-gradient(1250px circle at 100% 100%,
+                hsl(218, 41%, 45%) 15%,
+                hsl(218, 41%, 30%) 35%,
+                hsl(218, 41%, 20%) 75%,
+                hsl(218, 41%, 19%) 80%,
+                transparent 100%);
+        }
+
+        #radius-shape-1 {
+            height: 220px;
+            width: 220px;
+            top: -60px;
+            left: -130px;
+            background: radial-gradient(#44006b, #ad1fff);
+            overflow: hidden;
+        }
+
+        #radius-shape-2 {
+            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+            bottom: -60px;
+            right: -110px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(#44006b, #ad1fff);
+            overflow: hidden;
+        }
+
+        .bg-glass {
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(200%) blur(25px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden" style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container d-flex align-items-center justify-content-center h-100">
+        <div class="row w-100 gx-lg-5 align-items-center">
+            <div class="col-lg-6 position-relative">
+                <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            <input type='hidden' name='next' value="{{ next }}">
+                            <div style="display: flex; justify-content: center; align-items: center; margin-top: -20px">
+                                <span style="color: hsl(218, 81%, 75%); font-size: 2rem;">Edit Post</span>
+                            </div>
+
+                            <!-- Post message input -->
+                            <div class="form-outline mb-4">
+                                <!-- Label -->
+                                <label class="form-label" for="{{ form.message.id_for_label }}">
+                                    {{ form.message.label }}
+                                </label>
+                                <!-- Post message field -->
+                                <input type="text" name="{{ form.message.name }}" id="{{ form.message.id_for_label }}" class="form-control" placeholder="Enter your updated content" value="{{ form.message.value|default_if_none:'' }}" />
+                                <!-- Errors -->
+                                <div class="text-danger">
+                                    {{ form.message.errors }}
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                Save changes
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0 text-lg-start text-center" style="z-index: 10">
+                <h2 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    Edit Your Post <br />
+                    <span style="color: hsl(218, 81%, 75%)">Update your content easily</span>
+                </h2>
+                <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                    Use the form to make changes to your post. You can update the content, make adjustments, and ensure your post is as accurate and engaging as possible. Once you’ve made your edits, simply save the changes to update the post.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+
+</body>
+</html>
